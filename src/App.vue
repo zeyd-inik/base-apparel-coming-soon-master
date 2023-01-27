@@ -24,8 +24,11 @@
                     <button class="btn" type="submit">
                         <img src="./assets/images/icon-arrow.svg" />
                     </button>
+                    <!-- !    HTML         -->
+                    <div class="error_icon_container">
+                        <img src="./assets/images/icon-error.svg" alt="error icon" />
+                    </div>
                 </form>
-                <!-- !    HTML         -->
                 <p class="error_message_container">Please provide a valid email</p>
             </div>
         </section>
@@ -202,6 +205,11 @@ $Linear_to_2: hsl(0, 74%, 74%);
                     img {
                         transform: translateX(20%);
                     }
+                }
+                .error_icon_container {
+                    position: absolute;
+                    top: 9px;
+                    right: 80px;
                 }
             }
             .error_message_container {
