@@ -20,15 +20,16 @@
                     up-to-date with announcements and our launch deals
                 </p>
                 <form class="form">
-                    <input class="text_input" type="text" />
-                    <button type="submit">
+                    <input class="text_input" type="text" placeholder="Email Adress" />
+                    <button class="btn" type="submit">
                         <img src="./assets/images/icon-arrow.svg" />
                     </button>
                 </form>
+                <!-- !    HTML         -->
+                <p class="error_message_container">Please provide a valid email</p>
             </div>
         </section>
         <section class="img_desktop_container">
-            <!-- add css as display none -->
             <img src="./assets/images/hero-desktop.jpg" alt="girl" />
         </section>
     </div>
@@ -53,5 +54,179 @@ $Linear_to_2: hsl(0, 74%, 74%);
 * {
     font-family: 'Josefin Sans', sans-serif;
     font-size: 16px;
+    box-sizing: border-box;
+}
+.app {
+    width: 100vw;
+    overflow: hidden;
+    @media (min-width: 768px) {
+        display: grid;
+        grid-template-columns: 50vw 50vw;
+        overflow: hidden;
+    }
+
+    .main_text_container {
+        overflow: hidden;
+        display: grid;
+        grid-template-rows: 60px 250px auto;
+        width: 100vw;
+        @media (min-width: 768px) {
+            grid-template-rows: 200px auto;
+            width: 50vw;
+            height: 100vh;
+            max-width: 500px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin: 0 2rem;
+            @media (min-width: 768px) {
+                margin-right: auto;
+                padding-top: 4rem;
+                padding-bottom: 4rem;
+            }
+            img {
+                height: 1.5rem;
+            }
+        }
+        .img_mobile_container {
+            margin-bottom: 2rem;
+            overflow: hidden;
+            width: auto;
+            max-height: 300px;
+            @media (min-width: 768px) {
+                display: none;
+            }
+
+            img {
+                object-fit: cover;
+                object-position: top left;
+                width: 100%;
+                height: 100%;
+                display: inline-block;
+            }
+        }
+        .text_info_container {
+            padding: 0 2rem;
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            @media (min-width: 768px) {
+            }
+
+            .title_container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+
+                h1 {
+                    font-size: 2.4rem;
+                    margin: 0;
+                    letter-spacing: 5px;
+                    color: $Dark-Grayish-Red;
+                    @media (min-width: 414px) {
+                        font-size: 2.3rem;
+                    }
+                    @media (min-width: 768px) {
+                        font-size: 3rem;
+                    }
+                }
+                h1.pink_color_text {
+                    color: $Desaturated-Red;
+                    font-weight: 300;
+                }
+            }
+            .description {
+                color: $Desaturated-Red;
+                line-height: 1.4;
+                text-align: center;
+                font-size: 16px;
+                padding: 1rem 0;
+                @media (min-width: 414px) {
+                    font-size: 16px;
+                    padding: 1rem 0;
+                }
+                @media (min-width: 768px) {
+                    font-size: 17px;
+                }
+            }
+            .form {
+                width: 320px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                margin: 0 auto 2rem auto;
+                .text_input {
+                    padding: 0.7rem 1rem;
+                    width: 100%;
+                    border: 1px solid $Desaturated-Red;
+                    border-radius: 50px;
+                    &:focus {
+                        outline: none;
+                        color: $Dark-Grayish-Red;
+                        font-size: 16px;
+                    }
+                    &::placeholder {
+                        opacity: 0.5;
+                    }
+                }
+                /* update active state clicking effect */
+                .btn {
+                    display: inline-block;
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    height: 100%;
+                    width: 70px;
+                    border-radius: 50px;
+                    border: none;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-image: linear-gradient(135deg, $Linear_from_2, $Linear_to_2);
+                    transition: all ease 0.3s;
+
+                    &:hover {
+                        cursor: pointer;
+                        box-shadow: $Linear_from_2 0px 11px 20px 4px;
+                    }
+                    img {
+                        transform: translateX(20%);
+                    }
+                }
+            }
+            .error_message_container {
+                font-size: 13px;
+                color: $Soft-Red;
+                transform: translate(55px, -20px);
+                padding: 0 1rem;
+                width: 320px;
+                margin: 0 auto 0 0;
+            }
+        }
+    }
+    .img_desktop_container {
+        height: 100vh;
+        img {
+            object-fit: cover;
+            object-position: top center;
+            width: 100%;
+            height: 100%;
+            display: inline-block;
+        }
+
+        @media (max-width: 767px) {
+            display: none;
+        }
+    }
 }
 </style>
