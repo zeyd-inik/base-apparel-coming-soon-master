@@ -1,4 +1,17 @@
-<script setup></script>
+<script setup>
+import { ref } from 'vue';
+const error = ref(false);
+const input = ref('');
+const handleSubmit = () => {
+    const emailRegex =
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!emailRegex.test(input.value)) {
+        error.value = true;
+    } else {
+        error.value = false;
+    }
+};
+</script>
 
 <template>
     <div class="app">
@@ -19,16 +32,22 @@
                     Hello fellow shoppers! We're currently building our new fashion store. Add your email below to stay
                     up-to-date with announcements and our launch deals
                 </p>
-                <form class="form">
-                    <input class="text_input" type="text" placeholder="Email Adress" />
+                <form @submit.prevent="handleSubmit" class="form">
+                    <input
+                        :class="{ red: error }"
+                        v-model="input.value"
+                        class="text_input"
+                        type="text"
+                        placeholder="Email Adress"
+                    />
                     <button class="btn" type="submit">
                         <img src="./assets/images/icon-arrow.svg" />
                     </button>
-                    <div class="error_icon_container">
+                    <div v-if="error" class="error_icon_container">
                         <img src="./assets/images/icon-error.svg" alt="error icon" />
                     </div>
+                    <p class="error_message_container" v-if="error">Please provide a valid email</p>
                 </form>
-                <p class="error_message_container">Please provide a valid email</p>
             </div>
         </section>
         <section class="img_desktop_container">
@@ -114,7 +133,7 @@ $Linear_to_2: hsl(0, 74%, 74%);
             }
         }
         .text_info_container {
-            padding: 0 2rem;
+            padding: 0 0.3rem;
             max-width: 500px;
             margin: 0 auto;
             display: flex;
@@ -169,13 +188,13 @@ $Linear_to_2: hsl(0, 74%, 74%);
                 }
             }
             .form {
-                width: 320px;
+                width: 100%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 position: relative;
                 margin: 0 auto 2rem auto;
-                @media (max-width: 320px) {
+                @media (max-width: 375px) {
                     transform: scaleX(0.95);
                 }
                 .text_input {
@@ -183,6 +202,9 @@ $Linear_to_2: hsl(0, 74%, 74%);
                     width: 100%;
                     border: 1px solid $Desaturated-Red;
                     border-radius: 50px;
+                    @media (max-width: 500px) {
+                        font-size: 14px;
+                    }
                     &:focus {
                         outline: none;
                         color: $Dark-Grayish-Red;
@@ -191,6 +213,13 @@ $Linear_to_2: hsl(0, 74%, 74%);
                     &::placeholder {
                         opacity: 0.5;
                     }
+                    @media (max-width: 375px) {
+                        width: 90%;
+                    }
+                }
+
+                .text_input.red {
+                    border: 2px solid $Soft-Red;
                 }
                 /* update active state clicking effect */
                 .btn {
@@ -223,9 +252,10 @@ $Linear_to_2: hsl(0, 74%, 74%);
                 }
             }
             .error_message_container {
+                position: absolute;
+                bottom: -20px;
                 font-size: 13px;
                 color: $Soft-Red;
-                transform: translate(55px, -20px);
                 padding: 0 1rem;
                 width: 320px;
                 margin: 0 auto 0 0;
