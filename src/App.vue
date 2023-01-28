@@ -2,12 +2,25 @@
 import { ref } from 'vue';
 const error = ref(false);
 const input = ref('');
+const success = ref(false);
 const handleSubmit = () => {
     const emailRegex =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!emailRegex.test(input.value)) {
         error.value = true;
     } else {
+        error.value = false;
+        input.value = '';
+        success.value = true;
+        setTimeout(() => {
+            success.value = false;
+        }, 2500);
+    }
+};
+const clearError = () => {
+    const emailRegex =
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (emailRegex.test(input.value)) {
         error.value = false;
     }
 };
@@ -35,10 +48,11 @@ const handleSubmit = () => {
                 <form @submit.prevent="handleSubmit" class="form">
                     <input
                         :class="{ red: error }"
-                        v-model="input.value"
+                        v-model="input"
                         class="text_input"
                         type="text"
                         placeholder="Email Adress"
+                        @input="clearError"
                     />
                     <button class="btn" type="submit">
                         <img src="./assets/images/icon-arrow.svg" />
@@ -47,6 +61,12 @@ const handleSubmit = () => {
                         <img src="./assets/images/icon-error.svg" alt="error icon" />
                     </div>
                     <p class="error_message_container" v-if="error">Please provide a valid email</p>
+
+                    <Transition name="success">
+                        <p class="error_message_container success" v-if="success">
+                            The mail has been sent successfully
+                        </p>
+                    </Transition>
                 </form>
             </div>
         </section>
@@ -70,6 +90,15 @@ $Linear_from_1: hsl(0, 0%, 100%);
 $Linear_to_1: hsl(0, 100%, 98%);
 $Linear_from_2: hsl(0, 80%, 86%);
 $Linear_to_2: hsl(0, 74%, 74%);
+
+.success-enter-active,
+.success-leave-active {
+    transition: opacity 0.5s;
+}
+.success-enter-from,
+.success-leave-to {
+    opacity: 0;
+}
 
 //Global Styles
 * {
@@ -253,12 +282,16 @@ $Linear_to_2: hsl(0, 74%, 74%);
             }
             .error_message_container {
                 position: absolute;
-                bottom: -20px;
-                font-size: 13px;
+                bottom: -24px;
+                left: 5px;
+                font-size: 15px;
                 color: $Soft-Red;
                 padding: 0 1rem;
                 width: 320px;
                 margin: 0 auto 0 0;
+            }
+            .error_message_container.success {
+                color: green;
             }
         }
     }
