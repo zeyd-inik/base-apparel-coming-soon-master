@@ -14,7 +14,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./src/images/pic_big.png) ![](./src/images/pic_small.png)
+![](./src/assets/images/pic_big.png) ![](./src/assets/images/pic_small.png)
 
 ## My process
 
