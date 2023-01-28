@@ -24,7 +24,6 @@
                     <button class="btn" type="submit">
                         <img src="./assets/images/icon-arrow.svg" />
                     </button>
-                    <!-- !    HTML         -->
                     <div class="error_icon_container">
                         <img src="./assets/images/icon-error.svg" alt="error icon" />
                     </div>
@@ -61,6 +60,7 @@ $Linear_to_2: hsl(0, 74%, 74%);
 }
 .app {
     width: 100vw;
+    background-image: linear-gradient(135deg, $Linear_from_1, $Linear_to_1);
     overflow: hidden;
     @media (min-width: 768px) {
         display: grid;
@@ -121,7 +121,12 @@ $Linear_to_2: hsl(0, 74%, 74%);
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            @media (max-width: 320px) {
+                padding-left: 0;
+                padding-right: 0;
+            }
             @media (min-width: 768px) {
+                transform: translateY(-50px);
             }
 
             .title_container {
@@ -159,6 +164,8 @@ $Linear_to_2: hsl(0, 74%, 74%);
                 }
                 @media (min-width: 768px) {
                     font-size: 17px;
+                    padding-top: 2.3rem;
+                    padding-bottom: 2.3rem;
                 }
             }
             .form {
@@ -168,6 +175,9 @@ $Linear_to_2: hsl(0, 74%, 74%);
                 justify-content: center;
                 position: relative;
                 margin: 0 auto 2rem auto;
+                @media (max-width: 320px) {
+                    transform: scaleX(0.95);
+                }
                 .text_input {
                     padding: 0.7rem 1rem;
                     width: 100%;
